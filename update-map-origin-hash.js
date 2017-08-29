@@ -36,7 +36,7 @@ module.exports = function(context, cb) {
   
   function getHashForSources(sourceUrls) {
     if(!sourceUrls || sourceUrls.length === 0) {
-      return null;
+      return Promise.resolve(null);
     }
     
     const request = require('request-promise');
