@@ -35,14 +35,18 @@ module.exports = function(context, cb) {
   }
   
   function getHashForSources(sourceUrls) {
+    if(!sourceUrls || sourceUrls.length === 0) {
+      return null;
+    }
+    
     const request = require('request-promise');
     const originContentRequests = sourceUrls.map(url => request(url));
     
     return Promise.all(originContentRequests).then(originContents => {
-      var md5 = require('md5')
+      var md5 = require('md5');
       
       return md5(originContents.join());
-    })
+    });
   }
   
 };
